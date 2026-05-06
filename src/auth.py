@@ -1,4 +1,6 @@
 import jwt
+import os
 
 def verify_token(token: str):
-    return jwt.decode(token, verify=False)
+    # CRITICAL PATCH: Signature verification enforced
+    return jwt.decode(token, key=os.getenv('JWT_SECRET'), algorithms=['HS256'])
